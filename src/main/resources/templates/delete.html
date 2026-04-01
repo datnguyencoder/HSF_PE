@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation</title>
+    <style>
+        .dialog-box {
+            border: 1px solid black;
+            width: 400px;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+            margin-top: 50px;
+        }
+        .dialog-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .dialog-content {
+            margin-bottom: 20px;
+        }
+        .dialog-buttons {
+            text-align: center;
+        }
+        .dialog-buttons button {
+            width: 60px;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dialog-box">
+        <div class="dialog-title">Confirmation</div>
+        
+        <div class="dialog-content">
+            Are you sure you want to delete <br/>
+            "<span th:text="${shoe.shoesName}"></span>"?
+        </div>
+        
+        <div class="dialog-buttons">
+            <form th:action="@{/delete/{id}(id=${shoe.shoesId})}" method="post" style="display:inline-block;">
+                <button type="submit"> Yes </button>
+            </form>
+            <a th:href="@{/}"><button type="button"> No </button></a>
+        </div>
+    </div>
+</body>
+</html>

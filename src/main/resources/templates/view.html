@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Shoes Detail</title>
+    <style>
+        .container { border: 1px solid black; padding: 20px; width: 500px; margin-top: 20px; font-family: Arial, sans-serif; }
+        .header { margin-bottom: 20px; }
+        .header h3, .header h4 { margin: 5px 0; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: inline-block; width: 100px; }
+        .form-group input { width: 180px; }
+        .buttons { margin-top: 20px; text-align: center; }
+        .buttons button { padding: 5px 25px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h3>Shoes Management</h3>
+            <h4>View Shoes Info</h4>
+        </div>
+
+        <div class="form-group">
+            <label for="shoesNo">Shoes No:</label>
+            <input type="text" id="shoesNo" th:value="${shoeDTO.shoesNo}" readonly /> (read-only)
+        </div>
+
+        <div class="form-group">
+            <label for="shoesName">Shoes Name:</label>
+            <input type="text" id="shoesName" th:value="${shoeDTO.shoesName}" readonly /> (read-only)
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="text" id="price" th:value="${shoeDTO.price}" readonly /> (read-only)
+        </div>
+
+        <div class="form-group">
+            <label for="type">Type:</label>
+            <input type="text" id="type" th:value="${shoeDTO.type}" readonly /> (read-only)
+        </div>
+
+        <div class="buttons">
+            <a th:href="@{/}"><button type="button">Back</button></a>
+        </div>
+    </div>
+</body>
+</html>

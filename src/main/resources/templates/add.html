@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Shoes</title>
+    <style>
+        .container { border: 1px solid black; padding: 20px; width: 400px; margin-top: 20px; font-family: Arial, sans-serif; }
+        .header { margin-bottom: 20px; }
+        .header h3, .header h4 { margin: 5px 0; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: inline-block; width: 100px; }
+        .form-group input, .form-group select { width: 180px; }
+        .error { color: red; font-size: 12px; margin-left: 105px; display: block; }
+        .success { color: green; font-weight: bold; margin-bottom: 15px; }
+        .buttons { margin-top: 20px; padding-left: 105px; }
+        .buttons button { margin-right: 15px; width: 80px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h3>Shoes Management</h3>
+            <h4>Add New Shoes</h4>
+        </div>
+        
+        <div th:if="${message}" class="success" th:text="${message}"></div>
+
+        <form th:action="@{/add}" th:object="${shoeDTO}" method="post">
+            <div class="form-group">
+                <label for="shoesNo">Shoes No:</label>
+                <input type="text" id="shoesNo" th:field="*{shoesNo}" maxlength="10" />
+                <span class="error" th:if="${#fields.hasErrors('shoesNo')}" th:errors="*{shoesNo}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="shoesName">Shoes Name:</label>
+                <input type="text" id="shoesName" th:field="*{shoesName}" maxlength="100" />
+                <span class="error" th:if="${#fields.hasErrors('shoesName')}" th:errors="*{shoesName}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="text" id="price" th:field="*{price}" maxlength="5" /> [$]
+                <span class="error" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="type">Type:</label>
+                <select id="type" th:field="*{type}">
+                    <option value="">-- Dropdown v --</option>
+                    <option th:each="t : ${types}" th:value="${t.typeCode}" th:text="${t.typeCode} + '-' + ${t.typeName}"></option>
+                </select>
+                <span class="error" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span>
+            </div>
+
+            <div class="buttons">
+                <button type="submit">Add New</button>
+                <a th:href="@{/}"><button type="button">Back</button></a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

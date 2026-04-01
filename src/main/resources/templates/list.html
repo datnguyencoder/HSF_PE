@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shoes List</title>
+    <style>
+        table { border-collapse: collapse; width: 80%; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        .header-box { border: 1px solid black; padding: 10px; width: 80%; margin-bottom: 20px;}
+        .search-add { margin-bottom: 15px; width: 80%; }
+        .add-new { float: right; }
+    </style>
+</head>
+<body>
+    <div class="header-box">
+        <h2>Shoes Management</h2>
+    </div>
+    
+    <div>
+        <h3>Shoes List</h3>
+        <p th:if="${message}" th:text="${message}" style="color: green; font-weight: bold;"></p>
+        
+        <div class="search-add">
+            <form th:action="@{/}" method="get" style="display: inline-block;">
+                <label for="shoesName">Shoes Name:</label>
+                <input type="text" id="shoesName" name="shoesName" th:value="${shoesName}" />
+                <button type="submit">Search</button>
+            </form>
+            <div class="add-new">
+                <a th:href="@{/add}"><button type="button">Add New</button></a>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th># No</th>
+                    <th>Shoes No</th>
+                    <th>Shoes Name</th>
+                    <th>Type</th>
+                    <th>Price ($)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="shoe, iterStat : ${shoes}">
+                    <td th:text="${#numbers.formatInteger(iterStat.count, 2)}">01</td>
+                    <td th:text="${shoe.shoesNo}">SH0101</td>
+                    <td th:text="${shoe.shoesName}">Adidas</td>
+                    <td th:text="${shoe.type}">Sport</td>
+                    <td th:text="${shoe.price}">200</td>
+                    <td>
+                        <a th:href="@{/delete/{id}(id=${shoe.shoesId})}">Delete</a> |
+                        <a th:href="@{/view/{id}(id=${shoe.shoesId})}">View</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
